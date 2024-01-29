@@ -9,6 +9,7 @@ use actix_web::{middleware, App, HttpServer};
 use diesel::r2d2::ConnectionManager;
 use diesel::PgConnection;
 use r2d2::{Pool, PooledConnection};
+use dotenv::dotenv;
 
 mod constants;
 mod like;
@@ -21,6 +22,7 @@ pub type DBPooledConnection = PooledConnection<ConnectionManager<PgConnection>>;
 
 #[actix_rt::main]
 async fn main() -> io::Result<()> {
+    dotenv().ok();
     env::set_var("RUST_LOG", "actix_web=debug,actix_server=info");
     env_logger::init();
 
